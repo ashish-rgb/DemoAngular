@@ -1,0 +1,38 @@
+<div class="jumbtron" >
+    <h2 class="display-4 text-center">Employee Management System</h2>
+    <hr>
+    <div class="header">
+
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Employee Name</th>
+                <th>Designation</th>
+                <th>Salary</th>
+                <th>Phone</th>
+                <th>DOJ</th>
+                <th>Department name</th>
+                <th>Action for E-D</th>  <!--Edit / Delete-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employeesService.employees">
+                <td>{{employee.empId}}</td>
+                <td>{{employee.empName}}</td>
+                <td>{{employee.designation}}</td>
+                <td>{{employee.salary}}</td>
+                <td>{{employee.phone}}</td>
+                <td>{{employee.joinDate | date:'dd-MM-yyyy'}}</td>
+                <td>{{employee.department.deptName}}</td>
+                <td><button class="btn btn-sm btn-info">E</button>&nbsp;
+                <button class="btn btn-sm btn-outline-danger">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table> 
+</div>
+
+
+
