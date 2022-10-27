@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="header">
+    <div class="list-row">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search text here..." [(ngModel)]="filter" />
+        </div>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Password</th>
+        <th>Full Name</th>
+        <th>Role Name</th>
+        <th>Is Active</th>
+        <th>Action for E-D</th>
+        <!--Edit / Delete-->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of this.usersService.users | filter: filter | paginate: {itemsPerPage: 3 , currentPage: page}">
+        <td (click)="populateForm(user)">{{ user.userId }}</td>
+        <td (click)="populateForm(user)">{{ user.userName }}</td>
+        <td (click)="populateForm(user)">{{ user.password }}</td>
+        <td (click)="populateForm(user)">{{ user.fullName }}</td>
+        <td>{{ user.role.roleName }}</td>
+        <td>{{ user.active }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="populateForm(user)">
+            E</button
+          >&nbsp;
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="deleteUser(user.userId)"
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <!--Pagination-->
+    <pagination-controls (pageChange)="page=($event)"></pagination-controls>
+  </div>
+</div>
+
+<!--updateUser(user.userId)-->
