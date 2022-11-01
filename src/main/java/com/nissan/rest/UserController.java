@@ -1,6 +1,7 @@
 package com.nissan.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nissan.model.Role;
 import com.nissan.model.User;
 import com.nissan.service.IUserService;
+import com.nissan.service.LoginService;
 
 @CrossOrigin		//helps to avoid CORS error
 @RestController
@@ -27,6 +29,9 @@ public class UserController {
 	//field DI Injection
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	LoginService userDetailsService;
 	
 	//List all users
 	@GetMapping("users")
@@ -47,17 +52,25 @@ public class UserController {
 	}
 	
 	//Get User by Name
+	/*
 	@GetMapping("users/{fullName}")
 	public User searchByName(@PathVariable String fullName) {
 		System.out.println("Inside the controller");
 		return userService.searchByName(fullName);
 		}
+		*/
+	
+	@GetMapping("users/{userId}")
+	public Optional<User> findUserById(@PathVariable int userId){
+		return userService.findUserById(userId);
+	}
 		
 	//Add User
 	@PostMapping("users")
 	public ResponseEntity<User> addUser(@RequestBody User user){
 		System.out.println("Inserting a record");
-		return new ResponseEntity<User> (userService.addUser(user),HttpStatus.OK);
+		return new ResponseEntity<User> (userDetailsService.save(user),HttpStatus.OK);
+		//return new ResponseEntity<User> (userService.addUser(user),HttpStatus.OK);
 	}
 	
 	//Update User

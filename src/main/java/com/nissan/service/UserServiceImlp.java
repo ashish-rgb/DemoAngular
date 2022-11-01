@@ -3,7 +3,7 @@ package com.nissan.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,6 +108,11 @@ public class UserServiceImlp implements IUserService {
 	public void deleteUser(int userId) {
 		userRepo.deleteById(userId);
 		
+	}
+
+	@Override
+	public Optional<User> findUserById(int userId) {
+		return userRepo.findById(userId);
 	}
 
 }

@@ -29,6 +29,6 @@ public interface IUserRepository extends JpaRepositoryImplementation<User, Integ
 	@Query("update User u set u.isActive=true where u.userId=?1")
 	public void enableById(int userId);
 	
-	
+	User findByUserName(String username);
 	
 }
